@@ -2,3 +2,7 @@
   border: 1px solid $input-border;
   margin-bottom: 15px;
 }
+
+.list-group > a:hover {
+  background-color: $brand-info;
+}

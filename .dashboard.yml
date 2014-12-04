@@ -1,0 +1,9 @@
+logo: https://github.com/reviewninja/review.ninja/raw/master/src/client/assets/images/review-ninja-500.png
+branches:
+  - master
+  - release
+stats:
+  - url: http://review-ninja-staging.cfapps.io/count/user
+    icon: octicon octicon-organization
+  - url: http://review-ninja-staging.cfapps.io/count/star
+    icon: octicon octicon-star

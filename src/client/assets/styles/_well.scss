@@ -5,3 +5,8 @@
 
   margin-bottom: 10px;
 }
+
+.well-dark {
+	@extend .well;
+	background-color: $gray-light;
+}

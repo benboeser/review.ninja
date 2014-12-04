@@ -36,8 +36,8 @@ app.use(passport.session());
 
 // custom middleware
 app.use('/api', require('./middleware/param'));
-app.use('/github/webhook', require('./middleware/param'));
 app.use('/api', require('./middleware/authenticated'));
+app.use('/github/webhook', require('./middleware/param'));
 
 async.series([
 
@@ -103,14 +103,21 @@ async.series([
 
         console.log('bootstrap static files'.bold);
 
-        config.server.static.forEach(function(p) {
+        var publish = function(p, path) {
             app.use(sass.middleware({
                 src: p,
                 dest: p,
                 outputStyle: 'compressed',
                 force: config.server.always_recompile_sass
             }));
-            app.use(express.static(p));
+            app.use(path, express.static(p));
+        };
+
+        config.server.static.app.forEach(function(p) {
+            publish(p, '/');
+        });
+        config.server.static.lib.forEach(function(p) {
+            publish(p, '/lib');
         });
         callback();
     },

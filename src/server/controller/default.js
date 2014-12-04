@@ -10,6 +10,7 @@ var config = require('../../config');
 // Default router
 //////////////////////////////////////////////////////////////////////////////////////////////
 
+var url = require('../services/url');
 var router = express.Router();
 
 router.get('/accept', function(req, res) {
@@ -52,6 +53,7 @@ router.all('/*', function(req, res) {
             });
         });
     } else {
+        req.session.next = url.baseUrl + req.path;
         res.sendFile('login.html', {root: __dirname + './../../client'});
     }
 });

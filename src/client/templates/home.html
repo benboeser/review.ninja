@@ -13,8 +13,8 @@
 	<div class="col-md-6">
     <h2>Repositories <i class="fa fa-plus-circle text-primary" ng-click="show=!show; setFocus=true;"></i></h2>
 
-    <div class="well well-sm" ng-show="show">
-      <form ng-submit="search()">
+    <div class="well-dark well-sm" ng-show="show">
+      <form ng-submit="search()" style="margin: 15px;">
         <div class="input-group">
           <div class="form-group has-feedback">
             <input type="text" ng-model="query" focus="setFocus" class="form-control" style="height:33px;" />
@@ -26,7 +26,7 @@
           </span>
         </div>
         <span class="help-block" style="margin-top:1px;">
-          Type <em>username/</em> or <em>organization/</em> to find a repository
+          Type <em>username</em> or <em>organization</em> to find a repository
         </span>
         <div class="list-group" style="max-height:200px; overflow-y:scroll;" ng-show="results.length">
           <a href="" 
@@ -34,7 +34,7 @@
              ng-class="{ active: active===repo }" 
              ng-click="$parent.active=repo; add(repo);"
              ng-repeat="repo in results | orderBy: 'full_name'">
-            {{ repo.full_name }}
+            {{ repo.owner.login }} / {{ repo.name }}
             <i class="fa fa-lg fa-spinner fa-spin pull-right" ng-show="active===repo"></i>
           </a>
         </div>
@@ -73,7 +73,7 @@
       </table>
     </div>
 
-		<table class="table table-hover" style="margin-top: 15px;">
+		<table class="table table-hover">
 			<tr ng-repeat="repo in repos | filter:{ninja: true} | orderBy:['adddate', 'full_name']"
           ui-sref="repo.master({ user:repo.owner.login, repo:repo.name })"
           class="select">

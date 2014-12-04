@@ -10,6 +10,7 @@ var router = express.Router();
 
 router.get('/auth/github',
     function(req, res, next) {
+        req.session.referer = req.headers.referer;
         var scope = req.query.private === 'true' ? config.server.github.private_scope : config.server.github.public_scope;
         passport.authenticate('github', {scope: scope})(req, res, next);
     }
@@ -20,7 +21,9 @@ router.get('/auth/github/callback',
         failureRedirect: '/'
     }),
     function(req, res) {
-        res.redirect('/');
+        var next = req.session.next || '/';
+        req.session.next = null;
+        res.redirect(next);
     }
 );
 

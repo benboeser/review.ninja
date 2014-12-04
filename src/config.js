@@ -68,10 +68,10 @@ module.exports = {
             uri: process.env.MONGODB || process.env.MONGOLAB_URI
         },
 
-        static: [
-            __dirname + '/bower',
-            __dirname + '/client'
-        ],
+        static: {
+            lib: [__dirname + '/bower'],
+            app: [__dirname + '/client']
+        },
 
         api: [
             __dirname + '/server/api/*.js'

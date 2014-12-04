@@ -1,10 +1,8 @@
 // models
 var Star = require('mongoose').model('Star');
 
-var url = require('../services/url');
+// services
 var github = require('../services/github');
-var status = require('../services/status');
-var notification = require('../services/notification');
 var star = require('../services/star');
 
 module.exports = {
